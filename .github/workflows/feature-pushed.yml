@@ -38,7 +38,7 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_TOKEN}}
       - name: push image
         run: |
-          while IFS= read -r image; do                                                                                                                   ✹
+          while IFS= read -r image; do
           echo "created image $image"
           done <<< $(docker images --format "{{.Repository}}:{{.Tag}}" | grep rexijie)
 
