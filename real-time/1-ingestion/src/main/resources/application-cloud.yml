@@ -1,0 +1,31 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVER_URL}
+spring:
+  application:
+    name: RT-INGESTION-APP
+  kafka:
+    properties:
+      produce-to: ${KAFKA_TOPIC_TO}
+      security:
+        protocol: SASL_SSL
+      bootstrap:
+        servers: ${KAFKA_BOOTSTRAP_SERVERS}
+      sasl:
+        mechanism: PLAIN
+        jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${KAFKA_JAAS_USERNAME}'   password='${KAFKA_JAAS_PASSWORD}';
+      basic:
+        auth:
+          # Confluent Cloud Schema Registry
+          credentials:
+            source: USER_INFO
+            auth:
+              user:
+                info: ${SR_API_KEY}:${SR_API_SECRET}
+#      schema:
+#        registry:
+#          url: https://{{ SR_ENDPOINT }}
+server:
+  servlet:
+    context-path: /api
