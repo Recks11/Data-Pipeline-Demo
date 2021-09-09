@@ -1,0 +1,27 @@
+eureka:
+  client:
+    enabled: false
+spring:
+  application:
+    name: RT-INGESTION-APP-TEST
+  kafka:
+    properties:
+      produce-to: test
+      consume-from: test-1
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: ${spring.application.name}-group
+#      schema:
+#        registry:
+#          url: https://{{ SR_ENDPOINT }}
+server:
+  servlet:
+    context-path: /api
+  port: 5999
+
+#logging:
+#  level:
+#    root: ERROR
+#    org.springframework.web: ERROR
+#    com.memorynotfound: DEBUG
