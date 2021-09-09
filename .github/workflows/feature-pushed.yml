@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   build:
-    name: unit-tests
+    name: test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,14 +16,14 @@ jobs:
           distribution: adopt
           java-version: 16
           cache: maven
-      - name: startup tests
+      - name: Run tests
         run: mvn clean package -Dspring.profiles.active=test
       - name: Verify
         run: mvn clean verify -DskipTests
   deploy:
     name: deploy oci image
     runs-on: ubuntu-latest
-    needs: test
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
