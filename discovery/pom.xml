@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <groupId>dev.rexijie.pipeline</groupId>
     <artifactId>pipeline-discovery-server</artifactId>
     <version>0.1</version>
 
@@ -75,10 +74,9 @@
     </build>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
-        <relativePath/>
+        <groupId>dev.rexijie.pipeline</groupId>
+        <artifactId>data-pipeline</artifactId>
+        <version>0.0.1</version>
     </parent>
 
 </project>
