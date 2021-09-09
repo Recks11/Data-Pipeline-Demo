@@ -16,15 +16,15 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-maven-pipeline-
-        - name: Set up JDK
-          uses: actions/setup-java@v2
-          with:
-            distribution: adopt
-            java-version: 16
-            cache: maven
-        - name: build project
-          run: mvn compile
+              ${{ runner.os }}-maven-pipeline-
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 16
+          cache: maven
+      - name: build project
+        run: mvn compile
   test:
     name: unit-tests
     runs-on: ubuntu-latest
