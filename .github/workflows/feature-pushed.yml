@@ -35,7 +35,7 @@ jobs:
       - name: build-images
         run: mvn deploy -Dspring.profiles.active=test -DskipTests
       - name: login to Docker Hub
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_TOKEN}}
       - name: push image
         run: |
           while IFS= read -r image; do                                                                                                                   ✹
