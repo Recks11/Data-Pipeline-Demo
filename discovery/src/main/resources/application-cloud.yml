@@ -1,0 +1,21 @@
+server:
+  port: ${PORT}
+
+eureka:
+  instance:
+    hostname: ${HOST_NAME}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
+spring:
+  application:
+    name: PIPELINE-DISCOVERY-SERVER
