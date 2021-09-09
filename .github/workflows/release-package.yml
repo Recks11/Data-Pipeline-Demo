@@ -1,0 +1,25 @@
+name: Deploy package
+
+on:
+  push:
+    branches:
+      - workflow-test-runs
+
+jobs:
+  test:
+    name: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+      - name: unit-tests
+        run: mvn clean test -Dspring.profiles.active=test
+      - name: Verify
+        run: mvn clean verify -DskipTests
+      - name: build-images
+        run: mvn deploy -Dspring.profiles.active=test
+
+
