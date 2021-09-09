@@ -35,6 +35,8 @@ jobs:
           cache: maven
       - name: build-images
         run: mvn deploy -Dspring.profiles.active=test -DskipTests
+      - name: list images
+        run: docker images
 
 
 
