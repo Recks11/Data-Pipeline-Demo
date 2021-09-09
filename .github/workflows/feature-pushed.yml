@@ -20,6 +20,6 @@ jobs:
       - name: Verify
         run: mvn clean verify -DskipTests
       - name: build-images
-        run: mvn deploy -Dspring.profiles.active=test
+        run: mvn deploy -DskipTests
 
 
