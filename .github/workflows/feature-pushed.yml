@@ -19,5 +19,7 @@ jobs:
         run: mvn clean package -Dspring.profiles.active=test
       - name: Verify
         run: mvn clean verify -DskipTests
+      - name: build-images
+        run: mvn deploy -Dspring.profiles.active=test
 
 

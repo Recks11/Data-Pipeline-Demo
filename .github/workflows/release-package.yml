@@ -14,12 +14,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: adopt
           java-version: 16
-      - name: unit-tests
-        run: mvn clean test -Dspring.profiles.active=test
+#      - name: unit-tests
+#        run: mvn clean test -Dspring.profiles.active=test
       - name: Verify
         run: mvn clean verify -DskipTests
-      - name: build-images
-        run: mvn deploy -Dspring.profiles.active=test
+#      - name: build-images
+#        run: mvn deploy -Dspring.profiles.active=test
 
 
