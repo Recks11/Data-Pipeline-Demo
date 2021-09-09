@@ -36,6 +36,14 @@ jobs:
         with:
           distribution: adopt
           java-version: 16
+          cache: maven
+      - name: Cache .m2 repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-pipeline-
       - name: startup tests
         run: mvn clean package -Dspring.profiles.active=test
       - name: Verify
@@ -51,10 +59,11 @@ jobs:
         with:
           distribution: adopt
           java-version: 16
+          cache: maven
       - name: Verify
         run: mvn clean verify -DskipTests
       - name: build-images
-        run: mvn deploy -Dspring.profiles.active=test
+        run: mvn deploy -Dspring.profiles.active=test -DskipTests
 
 
 
