@@ -11,12 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache .m2 repository
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-pipeline-
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-pipeline-
         - name: Set up JDK
           uses: actions/setup-java@v2
           with:
