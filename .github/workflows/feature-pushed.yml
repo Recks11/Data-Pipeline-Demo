@@ -39,7 +39,7 @@ jobs:
       - name: push image
         run: |
           while IFS= read -r image; do
-          echo "created image $image"
+          docker push $image
           done <<< $(docker images --format "{{.Repository}}:{{.Tag}}" | grep rexijie)
 
 
