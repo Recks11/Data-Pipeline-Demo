@@ -3,10 +3,10 @@ name: Deploy package
 on:
   push:
     branches:
-      - workflow-test-runs
+      - main
 
 jobs:
-  test:
+  build:
     name: unit-tests
     runs-on: ubuntu-latest
     steps:
@@ -16,11 +16,39 @@ jobs:
         with:
           distribution: adopt
           java-version: 16
-#      - name: unit-tests
-#        run: mvn clean test -Dspring.profiles.active=test
+          cache: maven
+      - name: build project
+        run: mvn build
+  test:
+    name: unit-tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 16
+          cache: maven
+      - name: all-tests
+        run: mvn clean package -Dspring.profiles.active=test
       - name: Verify
         run: mvn clean verify -DskipTests
-#      - name: build-images
-#        run: mvn deploy -Dspring.profiles.active=test
+  deploy:
+    name: deploy oci image
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 16
+          cache: maven
+      - name: Verify
+        run: mvn clean verify -DskipTests
+      - name: build-images
+        run: mvn deploy -Dspring.profiles.active=test
 
 
