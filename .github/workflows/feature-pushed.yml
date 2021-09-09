@@ -13,6 +13,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: adopt
           java-version: 16
       - name: Package
         run: mvn clean package -Dspring.profiles.active=test
