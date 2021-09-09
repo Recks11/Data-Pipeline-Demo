@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache .m2 repository
+      - name: Check Cache
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
@@ -31,6 +31,13 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
+      - name: Check Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-pipeline-
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
@@ -54,14 +61,19 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v2
+      - name: Check Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-pipeline-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-pipeline-
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           distribution: adopt
           java-version: 16
           cache: maven
-      - name: Verify
-        run: mvn clean verify -DskipTests
       - name: build-images
         run: mvn deploy -Dspring.profiles.active=test -DskipTests
 
