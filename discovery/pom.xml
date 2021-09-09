@@ -59,7 +59,7 @@
                     <layers>
                         <enabled>true</enabled>
                     </layers>
-                    <imageName>rexijie/${artifactId}:${project.version}</imageName>
+                    <imageName>rexijie/${project.artifactId}:${project.version}</imageName>
                 </configuration>
             </plugin>
         </plugins>
