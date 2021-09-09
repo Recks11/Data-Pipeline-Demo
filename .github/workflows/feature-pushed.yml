@@ -5,18 +5,23 @@ on:
     branches-ignore:
       - main
 jobs:
-  test:
-    name: unit-tests
+  build:
+    name: test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
+          distribution: adopt
           java-version: 16
-      - name: Package
+          cache: maven
+      - name: Run tests
         run: mvn clean package -Dspring.profiles.active=test
       - name: Verify
         run: mvn clean verify -DskipTests
+
+
+
 
 
