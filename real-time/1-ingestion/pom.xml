@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ingestion-server</artifactId>
-    <version>0.0.1</version>
     <name>Ingestion Server</name>
-    <description>1-ingestion</description>
+    <description>Ingestion Server for Real time data pipeline</description>
 
     <properties>
         <java.version>16</java.version>
@@ -17,7 +16,7 @@
         <dependency>
             <groupId>dev.rexijie.pipeline.realtime</groupId>
             <artifactId>common</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
