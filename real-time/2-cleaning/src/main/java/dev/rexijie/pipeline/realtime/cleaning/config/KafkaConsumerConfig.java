@@ -1,8 +1,6 @@
 package dev.rexijie.pipeline.realtime.cleaning.config;
 
 import dev.rexijie.pipeline.realtime.cleaning.RealTimeCleaningApp;
-import dev.rexijie.pipeline.realtime.kafka.model.User;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

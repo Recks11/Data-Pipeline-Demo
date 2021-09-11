@@ -1,15 +1,10 @@
 package dev.rexijie.pipeline.realtime.cleaning.startup;
 
-import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.common.config.TopicConfig;
-import org.apache.kafka.common.internals.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.kafka.config.TopicBuilder;
-import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.stereotype.Component;
 
 @Component
