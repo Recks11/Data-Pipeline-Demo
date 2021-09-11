@@ -6,7 +6,9 @@ management:
     web:
       base-path: /manage
       exposure:
-        include: "*"
+        include:
+          - info
+          - health
 
 eureka:
   instance:
