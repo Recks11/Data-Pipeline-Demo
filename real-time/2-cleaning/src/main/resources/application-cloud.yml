@@ -1,4 +1,19 @@
+server:
+  port: ${PORT}
+
+management:
+  endpoints:
+    web:
+      base-path: /manage
+      exposure:
+        include:
+          - health
+          - info
+
 eureka:
+  instance:
+    health-check-url-path: ${management.endpoints.web.base-path}/health
+    status-page-url-path: ${management.endpoints.web.base-path}/info
   client:
     service-url:
       defaultZone: ${DISCOVERY_SERVER_URL}
@@ -6,11 +21,14 @@ spring:
   application:
     name: RT-CLEANING-APP
   kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: ${spring.application.name}-group
     properties:
       produce-to: ${KAFKA_TOPIC_TO}
       consume-from: ${KAFKA_TOPIC_FROM}
-      key.serializer: org.apache.kafka.common.serialization.StringSerializer
-      value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
       security:
         protocol: SASL_SSL
       bootstrap:
@@ -18,26 +36,22 @@ spring:
       sasl:
         mechanism: PLAIN
         jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${KAFKA_JAAS_USERNAME}'   password='${KAFKA_JAAS_PASSWORD}';
-      basic:
-        auth:
-          # Confluent Cloud Schema Registry
-          credentials:
-            source: USER_INFO
+      schema:
+        registry:
+          url: ${SR_ENDPOINT}
+          basic:
             auth:
-              user:
-                info: ${SR_API_KEY}:${SR_API_SECRET}
-    consumer:
-      group-id: ${spring.application.name}-group
-#      schema:
-#        registry:
-#          url: https://{{ SR_ENDPOINT }}
-server:
-  servlet:
-    context-path: /api
-  port: ${PORT}
+              # Confluent Cloud Schema Registry
+              credentials:
+                source: USER_INFO
+                user:
+                  info: ${SR_API_KEY}:${SR_API_SECRET}
 
-#logging:
-#  level:
-#    root: ERROR
-#    org.springframework.web: ERROR
-#    com.memorynotfound: DEBUG
+
+logging:
+  level:
+    root: ERROR
+    dev.rexijie.*: info
+    org.springframework.web: ERROR
+    com.memorynotfound: DEBUG
+    com.netflix.discovery.*: ERROR

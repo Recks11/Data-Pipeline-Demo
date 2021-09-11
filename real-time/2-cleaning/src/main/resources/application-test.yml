@@ -5,11 +5,12 @@ spring:
   application:
     name: RT-CLEANING-APP-TEST
   kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     properties:
       produce-to: test
       consume-from: test-1
-      key.serializer: org.apache.kafka.common.serialization.StringSerializer
-      value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       group-id: ${spring.application.name}-group
 #      schema:
