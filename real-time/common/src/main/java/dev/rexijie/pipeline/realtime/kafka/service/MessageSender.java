@@ -1,4 +1,4 @@
-package dev.rexijie.pipeline.realtime.ingestion.service;
+package dev.rexijie.pipeline.realtime.kafka.service;
 
 import dev.rexijie.pipeline.realtime.kafka.event.MessageEvent;
 
