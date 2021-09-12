@@ -8,6 +8,9 @@ import org.springframework.lang.NonNull;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
+/**
+ * Error Handler class
+ */
 @Component
 public class IngestionMessageErrorHandler implements KafkaListenerErrorHandler {
     private static final Logger LOG = LoggerFactory.getLogger(IngestionMessageErrorHandler.class);
